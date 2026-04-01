@@ -55,8 +55,12 @@ RUN pip install --upgrade pip setuptools
 RUN git clone -b shiken https://github.com/QueenArzoo/LaylaRobot /root/LaylaRobot
 WORKDIR /root/LaylaRobot
 
-# Copy config
-COPY ./LaylaRobot/sample_config.py ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/ || true
+# Create directory and copy config files properly
+RUN mkdir -p /root/LaylaRobot/LaylaRobot/
+
+COPY ./LaylaRobot/sample_config.py /root/LaylaRobot/LaylaRobot/sample_config.py 2>/dev/null || echo "sample_config.py not found"
+
+COPY ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/ 2>/dev/null || echo "config.py not found"
 
 ENV PATH="/home/bot/bin:$PATH"
 
