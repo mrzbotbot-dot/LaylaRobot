@@ -10,19 +10,21 @@ RUN apt-get update && apt-get upgrade -y && \
     tesseract-ocr \
     libsqlite3-dev \
     libzbar0 \
+    build-essential \
+    python3-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root/LaylaRobot/
 
 COPY requirements.txt .
 
-RUN pip3 install --no-cache-dir -U pip && \
+RUN pip3 install --no-cache-dir -U pip setuptools wheel && \
     pip3 install --no-cache-dir -U -r requirements.txt
 
 COPY . .
 
 RUN mkdir -p /root/LaylaRobot/LaylaRobot/ && \
-    (cp ./LaylaRobot/sample_config.py /root/LaylaRobot/LaylaRobot/sample_config.py 2>/dev/null || echo "File skip") && \
-    (cp ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/ 2>/dev/null || echo "File skip")
+    (cp ./LaylaRobot/sample_config.py /root/LaylaRobot/LaylaRobot/sample_config.py 2>/dev/null || echo "skip") && \
+    (cp ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/ 2>/dev/null || echo "skip")
 
 CMD ["python3", "-m", "LaylaRobot"]
