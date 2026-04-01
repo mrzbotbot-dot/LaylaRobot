@@ -10,14 +10,13 @@ dnspython
 fuzzywuzzy
 gspread
 httpx
-motor
 motor[srv]
 oauth2client
 opencv-python
 pillow
 psutil
 psycopg2-binary
-py-tesseract
+pytesseract
 pykeyboard
 pyrogram
 pytgcalls
@@ -29,5 +28,4 @@ requests
 spamwatch
 telethon
 tgcrypto
-youtube-dl
 yt-dlp
