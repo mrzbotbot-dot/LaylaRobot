@@ -15,13 +15,14 @@ RUN apt-get update && apt-get upgrade -y && \
 WORKDIR /root/LaylaRobot/
 
 COPY requirements.txt .
+
 RUN pip3 install --no-cache-dir -U pip && \
     pip3 install --no-cache-dir -U -r requirements.txt
 
 COPY . .
 
 RUN mkdir -p /root/LaylaRobot/LaylaRobot/ && \
-    (cp ./LaylaRobot/sample_config.py /root/LaylaRobot/LaylaRobot/sample_config.py 2>/dev/null || echo "File not found") && \
-    (cp ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/ 2>/dev/null || echo "File not found")
+    (cp ./LaylaRobot/sample_config.py /root/LaylaRobot/LaylaRobot/sample_config.py 2>/dev/null || echo "File skip") && \
+    (cp ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/ 2>/dev/null || echo "File skip")
 
 CMD ["python3", "-m", "LaylaRobot"]
