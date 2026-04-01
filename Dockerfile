@@ -1,15 +1,16 @@
-# We're using Debian Slim Buster image
-FROM python:3.8.5-slim-buster
+# Use a newer Python version
+FROM python:3.11-slim-bullseye
 
 ENV PIP_NO_CACHE_DIR 1
 
-RUN sed -i.bak 's/us-west-2\.ec2\.//' /etc/apt/sources.list
+# Fix apt sources
+RUN sed -i 's|http://deb.debian.org|http://archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i 's|http://security.debian.org|http://archive.debian.org|g' /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian bullseye main" > /etc/apt/sources.list.d/bullseye.sources.list
 
 # Installing Required Packages
-RUN apt update && apt upgrade -y && \
-    apt install --no-install-recommends -y \
-    debian-keyring \
-    debian-archive-keyring \
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y \
     bash \
     bzip2 \
     curl \
@@ -20,15 +21,8 @@ RUN apt update && apt upgrade -y && \
     libjpeg-dev \
     libjpeg62-turbo-dev \
     libwebp-dev \
-    linux-headers-amd64 \
-    musl-dev \
-    musl \
-    neofetch \
-    php-pgsql \
     python3-lxml \
-    postgresql \
     postgresql-client \
-    python3-psycopg2 \
     libpq-dev \
     libcurl4-openssl-dev \
     libxml2-dev \
@@ -42,7 +36,6 @@ RUN apt update && apt upgrade -y && \
     pv \
     jq \
     wget \
-    python3 \
     python3-dev \
     libreadline-dev \
     libyaml-dev \
@@ -53,13 +46,11 @@ RUN apt update && apt upgrade -y && \
     zlib1g \
     ffmpeg \
     libssl-dev \
-    libgconf-2-4 \
     libxi6 \
-    xvfb \
     unzip \
     libopus0 \
     libopus-dev \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
+    && apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
 
 # Pypi package Repo upgrade
 RUN pip3 install --upgrade pip setuptools
@@ -68,7 +59,7 @@ RUN pip3 install --upgrade pip setuptools
 RUN git clone -b shiken https://github.com/QueenArzoo/LaylaRobot /root/LaylaRobot
 WORKDIR /root/LaylaRobot
 
-#Copy config file to /root/LaylaRobot/LaylaRobot
+# Copy config file to /root/LaylaRobot/LaylaRobot
 COPY ./LaylaRobot/sample_config.py ./LaylaRobot/config.py* /root/LaylaRobot/LaylaRobot/
 
 ENV PATH="/home/bot/bin:$PATH"
