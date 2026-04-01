@@ -19,7 +19,8 @@ psycopg2-binary
 pytesseract
 pykeyboard
 pyrogram
-pytgcalls
+pytgcalls==0.8.2
+tgcalls==0.8.0
 python-dotenv
 markdown2
 python-arango
