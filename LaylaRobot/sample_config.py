@@ -14,21 +14,21 @@ class Config(object):
     # REQUIRED
     # Login to https://my.telegram.org and fill in these slots with the details given by it
 
-    API_ID = 123456  # integer value, dont use ""
-    API_HASH = "awoo"
-    TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
-    OWNER_ID = 797768146  # If you dont know, run the bot and do /id in your private chat with it, also an integer
-    OWNER_USERNAME = "HEROGAMERS1" 
+    API_ID = 26149781  # integer value, dont use ""
+    API_HASH = "88313af84cc33ca52912459da2a78685"
+    TOKEN = "8697639948:AAH4PdESNZkKhCoovZtY2e6MH-1S7frp2qg"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    OWNER_ID = 8199195480  # If you dont know, run the bot and do /id in your private chat with it, also an integer
+    OWNER_USERNAME = "XAVIER_Tgx" 
     SUPPORT_CHAT = "AwesomeSupport"  # Your own group for support, do not add the @
     JOIN_LOGGER = (
-        -1001392103597
+        -1002731067833
     )  # Prints any new group the bot is added to, prints just the name and ID.
     EVENT_LOGS = (
-        -1001392103597
+        -1002731067833
     )  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = "something://somewhat:user@hosturl:port/databasename"  # needed for any database modules
+    SQLALCHEMY_DATABASE_URI = "mongodb+srv://Moovieee:Aflahmmthhhh128544@cluster0.efyyavr.mongodb.net/?appName=Cluster0"  # needed for any database modules
     LOAD = []
     NO_LOAD = ["rss", "cleaner", "connection", "math"]
     WEBHOOK = False
